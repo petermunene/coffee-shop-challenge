@@ -1,18 +1,12 @@
 
 class Coffee:
     def __init__(self, name):
-        self.name=name
+        if not isinstance(name,str) or not (len(name)>=3):
+            raise TypeError ("Invalid name")
+        self._name=name
     @property
     def name(self):
         return self._name
-    @name.setter
-    def name(self,value):
-        if not isinstance(value,str) or not (len(value)>=3):
-            raise TypeError ("invalid name")
-        else:
-            self._name=value
-
-
     def orders(self):
         from order import Order
         orders=[]
@@ -47,11 +41,11 @@ class Coffee:
             if order.coffee==self:
                 prices.append(order.price)
         total=sum(prices)
-        average=total/len(prices)
-        if not average:
+        
+        if not len(prices):
             return 0
         else:
-            return average
+            return total/len(prices)
 
 
 

@@ -1,16 +1,16 @@
 
 class Customer:
     def __init__(self, name):
-        self.name=name
+        if not isinstance(name,str) or not (0<len(name)<16):
+            raise TypeError ("Invalid name")
+        self._name=name
     @property
     def name(self):
         return self._name
     @name.setter
     def name(self,value):
-        if not isinstance(value,str) or not (0<len(value)<16):
-            raise TypeError ("Invalid name")
-        else:
-            self._name=value
+        raise AttributeError("can't set name")
+
     def orders(self):
         from order import Order
         orders=[]
